@@ -5,7 +5,7 @@ const bodyparser = require('body-parser');
 const passport = require('passport');
 
 //passport config
-require('./config/passport')(passport);
+require('./config/passport');
 /*********************REQUIRES*************************/
 
 /*********************SET UPS*************************/
@@ -52,6 +52,6 @@ if (process.env.NODE_ENV === 'production') {
 const port = process.env.PORT || 3001;
 
 app.listen(port, () =>
-  console.log(`***********Server Running on Port ${port}***********`)
+  console.log(`***********Dev Server Running on Port ${port}***********`)
 );
 /*********************PORT*************************/
