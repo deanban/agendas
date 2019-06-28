@@ -25,7 +25,7 @@ module.exports = passport => {
             const hash = bcrypt.hashSync(password, jwtSec.saltRounds);
 
             Account.storeAccount({ email, hash }).then(() => {
-              done(null);
+              return done(null);
             });
           }
         });
@@ -33,5 +33,10 @@ module.exports = passport => {
         done(error);
       }
     })
+  );
+
+  passport.use(
+    'login',
+    new LocalStrategy(localStrategyOpts, (email, password, done) => {})
   );
 };

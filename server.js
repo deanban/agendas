@@ -4,6 +4,8 @@ const path = require('path');
 const bodyparser = require('body-parser');
 const passport = require('passport');
 
+const users = require('./routes/api/v1/account');
+
 //passport config
 require('./config/passport')(passport);
 /*********************REQUIRES*************************/
@@ -35,6 +37,8 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 //passport middleware
 app.use(passport.initialize());
+
+app.use('/api/users', users);
 
 /*********************SET UPS*************************/
 
