@@ -1,6 +1,6 @@
 CREATE TABLE note (
   id                              SERIAL PRIMARY KEY,
-  title                           TEXT,
+  title                           TEXT NOT NULL,
   body                            TEXT,
   "accountId"                     INTEGER NOT NULL,
   "projectId"                     INTEGER,

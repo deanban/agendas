@@ -1,8 +1,8 @@
 CREATE TABLE account (
   id            SERIAL PRIMARY KEY,
-  "firstName"   TEXT,
+  "firstName"   TEXT NOT NULL,
   "lastName"    TEXT,
-  email         TEXT,
-  password      CHARACTER(72),
-  "createdAt"   TIMESTAMPTZ DEFAULT Now(),
+  email         TEXT NOT NULL,
+  password      CHARACTER(72) NOT NULL,
+  "createdAt"   TIMESTAMPTZ DEFAULT Now()
 );
