@@ -1,18 +1,17 @@
 const pool = require('../../../pgPool');
 
 module.exports = class Account {
-  constructor(firstName, lastName, email, password) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+  constructor(email, password) {
+    // this.userName = userName;
     this.email = email;
     this.password = password;
   }
 
-  static storeAccount({ firstName, lastName, email, password }) {
+  static storeAccount({ email, password }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        `INSERT INTO account("firstName", "lastName", email, password) VALUES($1,$2,$3,$4)`,
-        [firstName, lastName, email, password],
+        `INSERT INTO account(email, password) VALUES($1,$2)`,
+        [email, password],
         (err, res) => {
           if (err) return reject(err);
           resolve({ message: 'Account Created.' });

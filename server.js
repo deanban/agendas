@@ -5,7 +5,7 @@ const bodyparser = require('body-parser');
 const passport = require('passport');
 
 //passport config
-require('./config/passport');
+require('./config/passport')(passport);
 /*********************REQUIRES*************************/
 
 /*********************SET UPS*************************/
