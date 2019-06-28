@@ -1,7 +1,7 @@
 CREATE TABLE task (
   id                              SERIAL PRIMARY KEY,
+  title                           TEXT NOT NULL,
   body                            TEXT,
-  about                           TEXT,
   done                            BOOLEAN NOT NULL DEFAULT 'f',
   'inProgress'                    BOOLEAN NOT NULL DEFAULT 'f',
   "accountId"                     INTEGER,
