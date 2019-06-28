@@ -1,6 +1,7 @@
 CREATE TABLE personal (
   id                              SERIAL PRIMARY KEY,
-  body                            TEXT,
+  body                            TEXT NOT NULL,
+  about                           TEXT,
   done                            BOOLEAN NOT NULL DEFAULT 'f',
   "accountId"                     INTEGER,
   "createdAt"                     TIMESTAMPTZ DEFAULT Now(),

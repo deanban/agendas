@@ -1,7 +1,7 @@
 CREATE TABLE project (
   id                              SERIAL PRIMARY KEY,
   body                            TEXT,
-  description                     TEXT,
+  about                           TEXT,
   done                            BOOLEAN NOT NULL DEFAULT 'f',
   "accountId"                     INTEGER,
   "createdAt"                     TIMESTAMPTZ DEFAULT Now(),
