@@ -3,5 +3,6 @@ CREATE TABLE account (
   "firstName"   TEXT,
   "lastName"    TEXT,
   email         TEXT,
-  password      CHARACTER(72)
+  password      CHARACTER(72),
+  "createdAt"   TIMESTAMPTZ DEFAULT Now(),
 );

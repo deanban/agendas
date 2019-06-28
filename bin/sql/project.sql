@@ -1,9 +1,9 @@
 CREATE TABLE project (
   id                              SERIAL PRIMARY KEY,
   body                            TEXT,
-  "accountId"                     INTEGER,
   done                            BOOLEAN NOT NULL DEFAULT 'f',
-  "createdAt"                     TIME with time zone,
+  "accountId"                     INTEGER,
+  "createdAt"                     TIMESTAMPTZ DEFAULT Now(),
   "doneAt"                        TIME with time zone,
   FOREIGN KEY ("accountId")       REFERENCES account(id),
 );
