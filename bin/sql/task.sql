@@ -3,6 +3,7 @@ CREATE TABLE task (
   body                            TEXT,
   about                           TEXT,
   done                            BOOLEAN NOT NULL DEFAULT 'f',
+  'inProgress'                    BOOLEAN NOT NULL DEFAULT 'f',
   "accountId"                     INTEGER,
   "projectId"                     INTEGER,
   "personalId"                    INTEGER,
@@ -10,5 +11,5 @@ CREATE TABLE task (
   "doneAt"                        TIME with time zone,
   FOREIGN KEY ("accountId")       REFERENCES account(id),
   FOREIGN KEY ("projectId")       REFERENCES project(id),
-  FOREIGN KEY ("personalId")      REFERENCES personal(id),
+  FOREIGN KEY ("personalId")      REFERENCES personal(id)
 );
