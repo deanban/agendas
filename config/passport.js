@@ -13,6 +13,11 @@ const localStrategyOpts = {
   session: false
 };
 
+const opts = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
+  secretOrKey: jwtSec.jwtKey
+};
+
 module.exports = passport => {
   passport.use(
     'register',
@@ -25,7 +30,7 @@ module.exports = passport => {
             const hash = bcrypt.hashSync(password, jwtSec.saltRounds);
 
             Account.storeAccount({ email, hash }).then(() => {
-              return done(null);
+              return done(null, user);
             });
           }
         });
@@ -37,6 +42,34 @@ module.exports = passport => {
 
   passport.use(
     'login',
-    new LocalStrategy(localStrategyOpts, (email, password, done) => {})
+    new LocalStrategy(localStrategyOpts, (email, password, done) => {
+      try {
+        Account.getAccountByEmail({ email }).then(({ account }) => {
+          if (account) {
+            if (bcrypt.compareSync(password, account.password.trim())) {
+              return done(null, user);
+            } else {
+              done(null, { message: 'Wrong password' });
+            }
+          } else {
+            done(null, false, { message: 'Account not found.' });
+          }
+        });
+      } catch (error) {
+        done(error);
+      }
+    })
+  );
+
+  passport.use(
+    'jwt',
+    new JwtStrategy(opts, (jwt_payload, done) => {
+      Account.getAccountById(jwt_payload)
+        .then(({ account }) => {
+          if (account) return done(null, user);
+          else return done(null, false, { message: 'user not found' });
+        })
+        .catch(err => done(err));
+    })
   );
 };
