@@ -7,7 +7,7 @@ const passport = require('passport');
 const users = require('./routes/api/v1/account');
 
 //passport config
-require('./config/passport')(passport);
+require('./config/passport');
 /*********************REQUIRES*************************/
 
 /*********************SET UPS*************************/
