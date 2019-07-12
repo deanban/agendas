@@ -32,7 +32,10 @@ passport.use(
           console.log(hash);
 
           Account.storeAccount({ email, password: hash }).then(
-            ({ message, account }) => {
+            ({ account }) => {
+              passport.serializeUser(function(account, done) {
+                done(null, account);
+              });
               return done(null, account);
             }
           );
