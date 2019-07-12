@@ -17,6 +17,27 @@ router.post(
   }
 );
 
+router.post('/login', async (req, res, next) => {
+  passport.authenticate('login', async (err, user, info) => {
+    try {
+      if (err || !user) {
+        const error = new Error('An Error occured');
+        return next(error);
+      }
+      req.login(user, { session: false }, async error => {
+        if (error) return next(error);
+        const body = { id: user.id, email: user.username };
+        //Sign the JWT token and populate the payload with the user email and id
+        const token = jwt.sign({ user: body }, 'top_secret');
+        //Send back the token to the user
+        return res.json({ token });
+      });
+    } catch (error) {
+      return next(error);
+    }
+  })(req, res, next);
+});
+
 // router.post('/register', (req, res, next) => {
 //   // console.log(req);
 //   passport.authenticate('register', (err, user, info) => {

@@ -23,7 +23,7 @@ module.exports = class Account {
   static getAccountByEmail({ email }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        `SELECT id, email FROM account
+        `SELECT id, email, password FROM account
         WHERE email=$1`,
         [email],
         (err, res) => {

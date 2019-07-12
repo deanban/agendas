@@ -52,6 +52,7 @@ passport.use(
     try {
       Account.getAccountByEmail({ email }).then(({ account }) => {
         if (account) {
+          // console.log(account);
           if (bcrypt.compareSync(password, account.password.trim())) {
             return done(null, user);
           } else {
