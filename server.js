@@ -5,7 +5,7 @@ const bodyparser = require('body-parser');
 const passport = require('passport');
 
 const users = require('./routes/api/v1/account');
-const users = require('./routes/api/v1/project');
+const projects = require('./routes/api/v1/project');
 
 //passport config
 require('./config/passport');
@@ -40,7 +40,7 @@ app.use(bodyparser.json());
 app.use(passport.initialize());
 
 app.use('/api/users', users);
-app.use('/api/users/projects', projects);
+app.use('/api/projects', projects);
 
 /*********************SET UPS*************************/
 

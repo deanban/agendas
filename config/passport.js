@@ -70,6 +70,7 @@ passport.use(
 passport.use(
   'jwt',
   new JwtStrategy(opts, (jwt_payload, done) => {
+    console.log(jwt_payload);
     Account.getAccountById(jwt_payload)
       .then(({ account }) => {
         if (account) return done(null, user);

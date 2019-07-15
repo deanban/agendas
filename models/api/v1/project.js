@@ -15,7 +15,7 @@ module.exports = class Project {
     this.accountId = accountId || PROJECT_DEFAULTS.accountId;
   }
 
-  storeProject = ({ title, body, accountId }) => {
+  static storeProject({ title, body, accountId }) {
     return new Promise((resolve, reject) => {
       pool.query(
         `INSERT INTO project(title, body, "accountId")
@@ -27,5 +27,5 @@ module.exports = class Project {
         }
       );
     });
-  };
+  }
 };
