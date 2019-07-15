@@ -9,7 +9,7 @@ router.post(
   '/new',
   passport.authenticate('jwt', { session: false }),
   (req, res, next) => {
-    // console.log(req.user);
+    console.log(req.user);
     // console.log(req.body);
   }
 );

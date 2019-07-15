@@ -54,7 +54,7 @@ passport.use(
         if (account) {
           // console.log(account);
           if (bcrypt.compareSync(password, account.password.trim())) {
-            return done(null, user);
+            return done(null, { id: account.id, email: account.email });
           } else {
             done(null, { message: 'Wrong password' });
           }
@@ -70,10 +70,10 @@ passport.use(
 passport.use(
   'jwt',
   new JwtStrategy(opts, (jwt_payload, done) => {
-    console.log(jwt_payload);
-    Account.getAccountById(jwt_payload)
+    // console.log('payload:', jwt_payload);
+    Account.getAccountById(jwt_payload.user)
       .then(({ account }) => {
-        if (account) return done(null, user);
+        if (account) return done(null, account);
         else return done(null, false, { message: 'user not found' });
       })
       .catch(err => done(err));
