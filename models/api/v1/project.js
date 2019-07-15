@@ -19,7 +19,7 @@ module.exports = class Project {
     return new Promise((resolve, reject) => {
       pool.query(
         `INSERT INTO project(title, body, "accountId")
-         VALUES($1,$2,$#) returning id, title, done, "inProgress", "createdAt"`,
+         VALUES($1,$2,$3) returning id, title, done, "inProgress", "createdAt"`,
         [title, body, accountId],
         (err, res) => {
           if (err) return reject(err);

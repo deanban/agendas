@@ -9,8 +9,20 @@ router.post(
   '/new',
   passport.authenticate('jwt', { session: false }),
   (req, res, next) => {
-    console.log(req.user);
-    // console.log(req.body);
+    const { title, body } = req.body;
+    const newProject = {
+      title: title,
+      body: body,
+      accountId: req.user.id
+    };
+    Project.storeProject(newProject)
+      .then(({ message, project }) => {
+        res.json({
+          message,
+          project
+        });
+      })
+      .catch(err => next(err));
   }
 );
 
