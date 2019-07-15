@@ -15,12 +15,25 @@ router.post(
       body: body,
       accountId: req.user.id
     };
-    Project.storeProject(newProject)
+    Project.getProjectByTitle(newProject)
       .then(({ message, project }) => {
-        res.json({
-          message,
-          project
-        });
+        if (project) {
+          res.json({
+            message,
+            project
+          });
+        } else {
+          Project.storeProject(newProject)
+            .then(({ message, project }) => {
+              res.json({
+                message,
+                project
+              });
+            })
+            .catch(err => {
+              throw err;
+            });
+        }
       })
       .catch(err => next(err));
   }

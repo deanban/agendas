@@ -28,4 +28,17 @@ module.exports = class Project {
       );
     });
   }
+
+  static getProjectByTitle({ title }) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        `SELECT id, title FROM project WHERE title=$1`,
+        [title],
+        (err, res) => {
+          if (err) return reject(err);
+          resolve({ message: 'Project Found', project: res.rows[0] });
+        }
+      );
+    });
+  }
 };
