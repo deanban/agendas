@@ -6,6 +6,7 @@ const passport = require('passport');
 
 const users = require('./routes/api/v1/account');
 const projects = require('./routes/api/v1/project');
+const tasks = require('./routes/api/v1/task');
 
 //passport config
 require('./config/passport');
@@ -41,6 +42,7 @@ app.use(passport.initialize());
 
 app.use('/api/users', users);
 app.use('/api/projects', projects);
+app.use('/api/tasks', tasks);
 
 /*********************SET UPS*************************/
 

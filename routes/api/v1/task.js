@@ -20,7 +20,7 @@ router.post(
 
     Task.getTaskByTitle(newTask)
       .then(({ message, task }) => {
-        if (task) {
+        if (task && task.length > 0) {
           res.json({ message, task });
         } else {
           if (projectId) {
@@ -51,3 +51,5 @@ router.post(
       .catch(err => next(err));
   }
 );
+
+module.exports = router;
